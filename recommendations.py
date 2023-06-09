@@ -55,10 +55,10 @@ def getRecommendations(prefs, person, similarity=sim_pearson):
                 totals[item] += prefs[other][item]*sim
                 simSums.setdefault(item, 0)
                 simSums[item] += sim
-        rankings = [(total/simSums[item], item)
-                    for item, total in totals.items()]
-        rankings.sort()
-        rankings.reverse()
+    rankings = [(total/simSums[item], item)
+                for item, total in totals.items()]
+    rankings.sort()
+    rankings.reverse()
     return rankings
 
 
