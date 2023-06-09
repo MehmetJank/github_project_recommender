@@ -236,9 +236,9 @@ class Gui(Frame):
                     for score, recommended_user_id in recommendations:
                         recommended_user = self.user_data[recommended_user_id]
                         self.recommendetions_listbox.insert(
-                            END, f"ID: {recommended_user['id']}, Username: {recommended_user['username']}, Score: {score}")
+                            END, f"ID: {recommended_user['github_url']}, Username: {recommended_user['username']}, Score: {score}")
                         self.recommendetions_listbox_tree_view.insert(
-                            "", "end", values=(recommended_user['username'], recommended_user['id'], score))
+                            "", "end", values=(recommended_user['username'], recommended_user['github_url'], score))
             else:
                 # if no recommendation found then add "No recommendation found" to listbox
                 self.recommendetions_listbox.insert(
