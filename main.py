@@ -45,7 +45,7 @@ class ReadData:
                             'github_url': user_info[2]
                         }
                         user_data.append(user)
-                # Kullanıcı adına göre alfabetik sıralama
+                # Username sorting alphabetically
                 user_data.sort(key=lambda x: x['username'])
         return user_data
 
@@ -64,6 +64,7 @@ class ReadData:
                         star_id = int(parts[0])
                         repositories = [int(repo_id)
                                         for repo_id in parts[1].split(',')]
+                        # give 5.0 score for each repository
                         star_data[star_id] = {
                             repo_id: 5.0 for repo_id in repositories}
             return star_data
@@ -159,6 +160,7 @@ class Gui(Frame):
             self.recommend_repositery_listbox.delete(0, END)
             self.recommend_repositery_listbox_tree_view.delete(
                 *self.recommend_repositery_listbox_tree_view.get_children())
+
             if self.user_data:
                 for user in self.user_data:
                     self.recommend_repositery_listbox.insert(
@@ -168,8 +170,10 @@ class Gui(Frame):
             else:
                 self.recommend_repositery_listbox.insert(
                     END, "No user data found")
+
         elif routes == "load_star_data":
             self.star_data = ReadData().load_star_data()
+
         elif routes == "load_repository_data":
             self.repository_data = ReadData().load_repository_data()
             self.repositery_data = {
@@ -205,9 +209,11 @@ class Gui(Frame):
 
         self.recommendation_filter = self.filter_by_programming_language_combobox.get()
 
+        # hasattr function checks if the object has the given named attribute and return True if present, else False.
         if hasattr(self, 'repository_data') and hasattr(self, 'star_data') and hasattr(self, 'user_data'):
             recommender = Recommend(
                 self.user_data, self.repository_data, self.star_data)
+
             if process == "recommend_repo":
                 recommendations = recommender.recommend_repositories(
                     self.recommendation_user_id, recommender.get_repository_preferences(), similarity, self.recommendation_filter, self.recommendation_number)
@@ -231,6 +237,7 @@ class Gui(Frame):
                         self.recommendetions_listbox_tree_view.insert(
                             "", "end", values=(recommended_user['username'], recommended_user['id'], score))
             else:
+                # if no recommendation found then add "No recommendation found" to listbox
                 self.recommendetions_listbox.insert(
                     END, "No recommendation found")
                 self.recommendetions_listbox_tree_view.insert(
