@@ -1,11 +1,12 @@
 # Author: Mehmet Can KAYA
 # Student ID: 211216058
+# Github: https://github.com/MehmetJank/github_project_recommender
 
-# recommendation.py dosyasında bulunan fonksiyonlar kullanılarak kullanıcıya ve repoya göre tavsiyelerde bulunulmuştur.
-# guncel recommendation.py dosyası ile çalismaktadir.
+# recommendation.py file is used to recommend repositories and users according to user and repository.
+# only works with current (check getRecommendations function) recommendation.py file
 from recommendations import *
 
-#
+# create a gui with tkinter
 from tkinter import (
     Tk,
     ttk,
@@ -146,6 +147,8 @@ class Recommend:
 
 
 class Gui(Frame):
+    """Gui class for create gui"""
+
     def __init__(self, parent):
         Frame.__init__(self, parent)
         self.parent = parent
@@ -412,6 +415,7 @@ class Gui(Frame):
 
 
 def main():
+    """Main function for starting the application"""
     root = Tk()
     root.geometry("900x475")
     root.title("Recommender System")
